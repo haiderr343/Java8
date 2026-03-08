@@ -1,0 +1,24 @@
+<project name="MyAndroidProject" default="build" basedir=".">
+    <property file="local.properties" />
+    <property file="ant.properties" />
+
+    <target name="clean">
+        <delete dir="bin" />
+        <delete dir="gen" />
+    </target>
+
+    <target name="compile">
+        <mkdir dir="bin" />
+        <javac srcdir="src" destdir="bin" classpath="libs/*" />
+    </target>
+
+    <target name="build" depends="clean, compile">
+        <echo message="Build complete!" />
+    </target>
+
+    <target name="run" depends="build">
+        <exec executable="adb">
+            <arg line="install -r bin/MyAndroidProject.apk" />
+        </exec>
+    </target>
+</project>
